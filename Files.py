@@ -25,7 +25,7 @@ class File_System:
             raise Exception("Error while obtaining the path of the pdf files.")
 
     def Create_OutputDirectory(self, directoryName):
-        dirName = os.getcwd() + chr(92) + directoryName + chr(92)
+        dirName = os.getcwd() + "/" + directoryName + "/"
         if not os.path.exists(dirName):
             os.mkdir(dirName)           
             print("Directory " , dirName ,  " Created ")
@@ -37,5 +37,5 @@ class File_System:
         return dirName
     
     def Get_OutputDirectory(self, directoryName):
-        dirName = os.getcwd() + chr(92) + directoryName + chr(92)
+        dirName = os.getcwd() + "/" + directoryName + "/"
         return dirName

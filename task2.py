@@ -18,7 +18,7 @@ agencyToSelect = "National Archives and Records Administration"
 if __name__ == "__main__":
     outputDirPath = file_System.Create_OutputDirectory(outputDirName)
     excelPath = outputDirPath + "Agencies.xlsx"
-    downloadPath = outputDirPath + chr(92)
+    downloadPath = outputDirPath + "/"
     print("Create Excel.")
     excel.Create_Woorkbook(excelPath)
     print("Open browser.")
