@@ -33,8 +33,7 @@ class PDF_File:
             raise Exception("Error extracting the value of the UII.")
 
     def find(self, rowList, target1, target2):
-        try:
-            print("Search PDF data in Investments table.")
+        try:            
             for i,lst in enumerate(rowList):
                 for j,valor in enumerate(lst):
                     if valor == target1 and rowList[i][j+2] == target2:

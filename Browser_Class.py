@@ -10,7 +10,7 @@ from RPA.FileSystem import FileSystem
 libFile = FileSystem()
 browser_lib = Selenium()
 fileFile = File_System()
-dirPath = fileFile.Get_OutputDirectory("Output")
+dirPath = fileFile.Get_OutputDirectory("output")
 browser_lib.set_download_directory(directory= dirPath, download_pdf=False)
 
 class Browser:

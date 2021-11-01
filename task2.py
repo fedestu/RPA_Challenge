@@ -12,8 +12,8 @@ pdf_File = PDF_File()
 excel = ExcelAgency()
 
 #Variables
-outputDirName = "Output"
-agencyToSelect = "National Science Foundation"
+outputDirName = "output"
+gagencyToSelect = "National Science Foundation"
 
 if __name__ == "__main__":
     outputDirPath = file_System.Create_OutputDirectory(outputDirName)
@@ -33,7 +33,8 @@ if __name__ == "__main__":
     excel.Write_IITable(tableInvestments, excelPath)    
     UIILinkList = browser.Get_UIILink()
     browser.Download_PDF(UIILinkList)
-    time.sleep(5)    
+    time.sleep(5)
+    print("Search PDF data in Investments table.")    
     pdf_Path = file_System.Get_PathFiles(downloadPath + "*.pdf")
     for pdf in pdf_Path:
         text = pdf_File.Get_PDFText(pdf)
