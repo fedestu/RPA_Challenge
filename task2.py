@@ -13,7 +13,7 @@ excel = ExcelAgency()
 
 #Variables
 outputDirName = "Output"
-agencyToSelect = "National Archives and Records Administration"
+agencyToSelect = "National Science Foundation"
 
 if __name__ == "__main__":
     outputDirPath = file_System.Create_OutputDirectory(outputDirName)

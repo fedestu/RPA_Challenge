@@ -19,6 +19,7 @@ class Browser:
         try:            
             browser_lib.open_available_browser(url)
             browser_lib.maximize_browser_window()
+            print("Open browser.")
         except:
             raise Exception("Can't open the browser.")
 
@@ -62,6 +63,7 @@ class Browser:
             browser_lib.click_element_if_visible("(//span[@class='h4 w200'][normalize-space()='" + agencyToSelect + "'])[1]")
             browser_lib.wait_until_element_is_visible("//select[@aria-controls='investments-table-object']",10,"Error")
             browser_lib.select_from_list_by_value("//select[@aria-controls='investments-table-object']", "-1")
+            print("Select " + agencyToSelect + " agency in the web.")
         except:
             raise Exception("Can't select " + agencyToSelect)
 
@@ -101,6 +103,7 @@ class Browser:
 
             for item in listaTemporal:
                 listaFinal.append(item)
+            print("Get Investments table.")
             return listaFinal
         except:
             raise Exception("Can't extract all the data of the table.")
@@ -134,6 +137,7 @@ class Browser:
                             browser_lib.wait_until_page_does_not_contain_element("//img[@alt='Generating PDF']",60,"Can't download PDF.")
                         except:
                             continue
+            print("Download PDFs.")
         except:
             raise Exception("Error during PDF downloads.")
 # -
