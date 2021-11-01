@@ -12,6 +12,7 @@ class ExcelAgency:
             lib.set_cell_value(1, 1, "Agencie", name='Agencies', fmt=None)
             lib.set_cell_value(1, 2, "Cost", name='Agencies', fmt=None)
             lib.save_workbook()
+            print("Create Excel.")
         except:
             raise Exception("Error in excel creation.")
 
@@ -81,5 +82,6 @@ class ExcelAgency:
                 i += 1
 
             lib.save_workbook()
+            print("Write Investments table in Excel.")
         except:
             raise Exception("Error while writing the table in excel.")
