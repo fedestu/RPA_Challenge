@@ -15,9 +15,9 @@ class ExcelAgency:
         except:
             raise Exception("Error in excel creation.")
 
-    def Write_AgencyData(self, agencyList, agencyCost):
+    def Write_AgencyData(self, agencyList, agencyCost, excelPath):
         try:
-            lib.open_workbook("C:/Users/Programacion/Desktop/Prueba.xlsx")
+            lib.open_workbook(excelPath)
             row = 2
             colunm = 1
             for agency in agencyList:
@@ -33,9 +33,9 @@ class ExcelAgency:
         except:
             raise Exception("Error while writing the agency data in excel.")    
 
-    def Write_TableHeaders(self):
+    def Write_TableHeaders(self, excelPath):
         try:
-            lib.open_workbook("C:/Users/Programacion/Desktop/Prueba.xlsx")    
+            lib.open_workbook(excelPath)    
             lib.set_cell_value(1, 1, "UII", name='Individual Investments', fmt=None)
             lib.set_cell_value(1, 2, "Bureau", name='Individual Investments', fmt=None)
             lib.set_cell_value(1, 3, "Investment Title", name='Individual Investments', fmt=None)
@@ -47,9 +47,9 @@ class ExcelAgency:
         except:
             raise Exception("Error while writing table headers in excel.")
 
-    def Create_NewWorksheet(self, wsName):
+    def Create_NewWorksheet(self, wsName, excelPath):
         try:
-            lib.open_workbook("C:/Users/Programacion/Desktop/Prueba.xlsx")
+            lib.open_workbook(excelPath)
             lib.create_worksheet(wsName, content=None, exist_ok=False, header=False)
             lib.set_cell_value(1, 1, "UII", name='Individual Investments', fmt=None)
             lib.set_cell_value(1, 2, "Bureau", name='Individual Investments', fmt=None)
@@ -62,9 +62,9 @@ class ExcelAgency:
         except:
             raise Exception("Error while writing table headers in excel.")
 
-    def Write_IITable(self, IITable):
+    def Write_IITable(self, IITable, excelPath):
         try:
-            lib.open_workbook("C:/Users/Programacion/Desktop/Prueba.xlsx")
+            lib.open_workbook(excelPath)
 
             i = 0
             row = 2

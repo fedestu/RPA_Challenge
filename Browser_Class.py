@@ -3,17 +3,20 @@ from RPA.Browser.Selenium import Selenium
 import time
 from Excel_Class import *
 from RPA.Excel.Files import Files
-from Files import *
+from Files import File_System
 from RPA.FileSystem import FileSystem
 
 
 libFile = FileSystem()
 browser_lib = Selenium()
+fileFile = File_System()
+dirPath = fileFile.Get_OutputDirectory("Output")
+browser_lib.set_download_directory(directory= dirPath, download_pdf=False)
 
 class Browser:
 
     def open_the_website(self, url):
-        try:
+        try:            
             browser_lib.open_available_browser(url)
             browser_lib.maximize_browser_window()
         except:
@@ -65,7 +68,7 @@ class Browser:
     def Get_UIILink(self):
         UIIListLink = []
         try:
-            UIILink = browser_lib.find_elements(locator="//td[@class='left sorting_2']//a")            
+            UIILink = browser_lib.find_elements(locator="//td[@class='left sorting_2']//a")
 
             for link in UIILink:
                 UIIListLink.append(link.get_attribute("href"))
@@ -116,13 +119,13 @@ class Browser:
 
     def Download_PDF(self, urlList):
         try:
-            browser_lib.set_download_directory(directory="C:/Users/Programacion/Desktop/Algo/", download_pdf=False)
+#             browser_lib.set_download_directory(directory="C:/Users/Programacion/Desktop/Algo/", download_pdf=False)
             for url in urlList:
                 browser_lib.go_to(url)
                 browser_lib.click_element_when_visible("//a[normalize-space()='Download Business Case PDF']")
                 try:
                     browser_lib.wait_until_page_does_not_contain_element("//img[@alt='Generating PDF']",60,"Can't download PDF.")
-                except:                
+                except:
                     exist = libFile.does_file_exist(path)
                     if exist == False:
                         browser_lib.go_to(url)
@@ -131,6 +134,8 @@ class Browser:
                             browser_lib.wait_until_page_does_not_contain_element("//img[@alt='Generating PDF']",60,"Can't download PDF.")
                         except:
                             continue
-    #             browser_lib.set_download_directory
         except:
             raise Exception("Error during PDF downloads.")
+# -
+
+

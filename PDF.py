@@ -10,7 +10,7 @@ class PDF_File:
             text = pdf.get_text_from_pdf(pdfPath)
             return text
         except:
-            raise Exception("")
+            raise Exception("Error reading PDF.")
 
     def Get_PDFNameInvestment(self, pdfText):
         try:
@@ -20,7 +20,7 @@ class PDF_File:
             nameInvestment = sectionA[firstPosition+24:secondPosition]
             return nameInvestment.strip()
         except:
-            raise Exception("")
+            raise Exception("Error extracting the value of the investment.")
 
     def Get_PDFUII(self, pdfText):
         try:
@@ -30,7 +30,7 @@ class PDF_File:
             UIIValue = sectionA[firstPosition+38:secondPosition]
             return UIIValue.strip()
         except:
-            raise Exception("")
+            raise Exception("Error extracting the value of the UII.")
 
     def find(self, rowList, target1, target2):
         try:
@@ -40,4 +40,4 @@ class PDF_File:
                         return True
             return False
         except:
-            raise Exception("")
+            raise Exception("Error when searching for the existence of UII and Inversion within the table.")

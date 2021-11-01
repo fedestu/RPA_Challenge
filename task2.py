@@ -4,34 +4,54 @@ from Files import File_System
 from PDF import PDF_File
 from Excel_Class import ExcelAgency
 import time
+from RPA.Desktop.OperatingSystem import OperatingSystem
 
 browser = Browser()
 file_System = File_System()
 pdf_File = PDF_File()
 excel = ExcelAgency()
 
-# dsada
-if name == "main":
-    excel.Create_Woorkbook("C:/Users/Programacion/Desktop/Prueba.xlsx")
+#Variables
+outputDirName = "Output"
+agencyToSelect = "National Archives and Records Administration"
+
+if __name__ == "__main__":
+    outputDirPath = file_System.Create_OutputDirectory(outputDirName)
+    excelPath = outputDirPath + "Agencies.xlsx"
+    downloadPath = outputDirPath + chr(92)
+    print("Create Excel.")
+    excel.Create_Woorkbook(excelPath)
+    print("Open browser.")
     browser.open_the_website("http://itdashboard.gov/")
     browser.click_DiveIn()
     AgencyList = browser.Get_Agencies()
     AgencyCost = browser.Get_Cost(AgencyList)
-    excel.Write_AgencyData(AgencyList, AgencyCost)
-    browser.Select_Agency("Department of Commerce")
+    excel.Write_AgencyData(AgencyList, AgencyCost, excelPath)
+    print("Select " + agencyToSelect + " agency in the web.")
+    browser.Select_Agency(agencyToSelect)
     time.sleep(12)
+    print("Get Investments table.")
     tableInvestments = browser.Get_Table()
+    print("Write Investments table in Excel.")
+    excel.Create_NewWorksheet("Individual Investments", excelPath)
+    excel.Write_TableHeaders(excelPath)
+    excel.Write_IITable(tableInvestments, excelPath)
+    print("Download PDFs.")
     UIILinkList = browser.Get_UIILink()
     browser.Download_PDF(UIILinkList)
-    excel.Create_NewWorksheet("Individual Investments")
-    excel.Write_TableHeaders()
-    excel.Write_IITable(tableInvestments)
-    pdf_Path = file_System.Get_PathFiles("C:/Users/Programacion/Desktop/Output/*.pdf")
+    time.sleep(5)
+    print("Search PDF data in Investments table.")
+    pdf_Path = file_System.Get_PathFiles(downloadPath + "*.pdf")
     for pdf in pdf_Path:
-        pdf_File.Get_PDFText(pdf)
-        pdf
+        text = pdf_File.Get_PDFText(pdf)
+        UIIValue = pdf_File.Get_PDFUII(text)
+        NameInvestment = pdf_File.Get_PDFNameInvestment(text)
+        print("UIIValue = " + UIIValue + " y NameInvestment = " + NameInvestment)
+        result = pdf_File.find(tableInvestments, UIIValue, NameInvestment)
+        print(result)
 
 
 # -
+
 
 

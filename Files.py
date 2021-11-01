@@ -1,6 +1,8 @@
 # +
 from RPA.FileSystem import FileSystem
 from PDF import *
+import os
+import shutil
 
 lib = FileSystem()
 
@@ -21,3 +23,19 @@ class File_System:
             return filesList
         except:
             raise Exception("Error while obtaining the path of the pdf files.")
+
+    def Create_OutputDirectory(self, directoryName):
+        dirName = os.getcwd() + chr(92) + directoryName + chr(92)
+        if not os.path.exists(dirName):
+            os.mkdir(dirName)           
+            print("Directory " , dirName ,  " Created ")
+        else:
+            print("Directory " , dirName ,  " already exists, deleting directory.")
+            shutil.rmtree(dirName)
+            os.mkdir(dirName)
+            print("Directory " , dirName ,  " Created ")
+        return dirName
+    
+    def Get_OutputDirectory(self, directoryName):
+        dirName = os.getcwd() + chr(92) + directoryName + chr(92)
+        return dirName

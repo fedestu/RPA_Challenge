@@ -1,6 +1,6 @@
 tasks:
   Run Python:
-    shell: python task.py
+    shell: python task2.py
 
 condaConfigFile: conda.yaml
 artifactsDir: output
