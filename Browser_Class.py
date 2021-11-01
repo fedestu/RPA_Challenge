@@ -120,9 +120,8 @@ class Browser:
         except:
             raise Exception("")
 
-    def Download_PDF(self, urlList):
+    def Download_PDF(self, urlList, path):
         try:
-#             browser_lib.set_download_directory(directory="C:/Users/Programacion/Desktop/Algo/", download_pdf=False)
             for url in urlList:
                 browser_lib.go_to(url)
                 browser_lib.click_element_when_visible("//a[normalize-space()='Download Business Case PDF']")
