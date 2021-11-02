@@ -43,8 +43,7 @@ if __name__ == "__main__":
         UIIValue = pdf_File.Get_PDFUII(text)
         NameInvestment = pdf_File.Get_PDFNameInvestment(text)       
         result = pdf_File.find(tableInvestments, UIIValue, NameInvestment)
-        print("UIIValue = " + UIIValue + " and NameInvestment = " + NameInvestment + ". Exist " + result)
-
+        print("UIIValue = " + UIIValue + " and NameInvestment = " + NameInvestment + ". Exist = " + str(result))
 
 # -
 
