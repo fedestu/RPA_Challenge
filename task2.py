@@ -4,7 +4,6 @@ from Files import File_System
 from PDF import PDF_File
 from Excel_Class import ExcelAgency
 import time
-from RPA.Desktop.OperatingSystem import OperatingSystem
 
 browser = Browser()
 file_System = File_System()
@@ -13,11 +12,14 @@ excel = ExcelAgency()
 
 #Variables
 outputDirName = "output"
-agencyToSelect = "National Science Foundation"
 
 if __name__ == "__main__":
-    outputDirPath = file_System.Create_OutputDirectory(outputDirName)
-    excelPath = outputDirPath + "Agencies.xlsx"
+    configPath = file_System.Get_OutputDirectory("ConfigFile")    
+    configValues = excel.Get_ConfigFileValue(configPath + "/ConfigFile.xlsx")
+    agencyToSelect = configValues["Agency"]
+    excelName = configValues["ExcelName"]      
+    outputDirPath = file_System.Create_OutputDirectory(outputDirName)   
+    excelPath = outputDirPath + excelName
     downloadPath = outputDirPath + "/"    
     excel.Create_Woorkbook(excelPath)    
     browser.open_the_website("http://itdashboard.gov/")
@@ -39,10 +41,9 @@ if __name__ == "__main__":
     for pdf in pdf_Path:
         text = pdf_File.Get_PDFText(pdf)
         UIIValue = pdf_File.Get_PDFUII(text)
-        NameInvestment = pdf_File.Get_PDFNameInvestment(text)
-        print("UIIValue = " + UIIValue + " y NameInvestment = " + NameInvestment)
+        NameInvestment = pdf_File.Get_PDFNameInvestment(text)       
         result = pdf_File.find(tableInvestments, UIIValue, NameInvestment)
-        print(result)
+        print("UIIValue = " + UIIValue + " and NameInvestment = " + NameInvestment + ". Exist " + result)
 
 
 # -

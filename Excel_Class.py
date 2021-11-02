@@ -12,7 +12,7 @@ class ExcelAgency:
             lib.set_cell_value(1, 1, "Agencie", name='Agencies', fmt=None)
             lib.set_cell_value(1, 2, "Cost", name='Agencies', fmt=None)
             lib.save_workbook()
-            print("Create Excel.")
+            print("Create Excel.")            
         except:
             raise Exception("Error in excel creation.")
 
@@ -85,3 +85,14 @@ class ExcelAgency:
             print("Write Investments table in Excel.")
         except:
             raise Exception("Error while writing the table in excel.")
+
+    def Get_ConfigFileValue(self, excelPath):
+        configFile = {}
+        try:
+            lib.open_workbook(excelPath)
+            configFile["Agency"] = lib.get_cell_value(1, 2, name=None)
+            configFile["ExcelName"] = lib.get_cell_value(2, 2, name=None)
+            lib.close_workbook()
+            return configFile
+        except:
+            raise Exception("Error while open the ConfigFile Excel.")
