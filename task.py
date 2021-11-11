@@ -18,5 +18,5 @@ if __name__ == "__main__":
         itDashboard.find_Exist_Value(agencyTable)
         print("The process has been successfully completed. ")
     finally:
-        itDashboard.close_Browser() 
+        itDashboard.close_Browser()
 
